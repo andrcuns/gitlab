@@ -13,8 +13,10 @@ describe Gitlab::ObjectifiedHash do
     let(:oh) { described_class.new(hash) }
 
     it 'allows to call Hash methods' do
-      expect(oh['foo']).to eq('bar')
-      expect(oh.merge(key: :value)).to eq('foo' => 'bar', key: :value)
+      capture_output do
+        expect(oh['foo']).to eq('bar')
+        expect(oh.merge(key: :value)).to eq('foo' => 'bar', key: :value)
+      end
     end
 
     it 'warns about calling Hash methods' do
